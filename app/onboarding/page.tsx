@@ -46,24 +46,29 @@ export default function OnboardingPage() {
   };
 
   const handleComplete = async () => {
-    // In a real app, this would save to user metadata
-    // For now, we'll just redirect to dashboard
-    if (user) {
-      await user.update({
-        unsafeMetadata: {
-          onboardingCompleted: true,
-          trackedRoutes: [
-            {
-              id: Date.now().toString(),
-              country: countries.find(c => c.id === selectedCountry)?.name,
-              visaType: selectedVisaType,
-              location: selectedLocation,
-            },
-          ],
-        },
-      });
+    try {
+      // In a real app, this would save to user metadata
+      if (user) {
+        await user.update({
+          unsafeMetadata: {
+            onboardingCompleted: true,
+            trackedRoutes: [
+              {
+                id: Date.now().toString(),
+                country: countries.find(c => c.id === selectedCountry)?.name,
+                visaType: selectedVisaType,
+                location: selectedLocation,
+              },
+            ],
+          },
+        });
+      }
+      router.push("/dashboard");
+    } catch (error) {
+      console.error("Failed to save preferences:", error);
+      // Still redirect but user might need to onboard again
+      router.push("/dashboard");
     }
-    router.push("/dashboard");
   };
 
   return (

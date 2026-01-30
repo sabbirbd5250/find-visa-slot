@@ -28,7 +28,10 @@ export default function VisaSlotCard({ slot }: VisaSlotCardProps) {
       
       {/* Status indicator */}
       <div className="absolute top-4 right-4">
-        <span className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium text-white ${statusColors[slot.status]}`}>
+        <span 
+          className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium text-white ${statusColors[slot.status]}`}
+          aria-label={`Status: ${statusLabels[slot.status]}`}
+        >
           {statusLabels[slot.status]}
         </span>
       </div>

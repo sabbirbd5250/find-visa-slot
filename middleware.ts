@@ -6,11 +6,13 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, req) => {
   if (isProtectedRoute(req)) {
-    try {
-      auth().protect();
-    } catch (e) {
-      // Allow in development without valid Clerk keys
+    // Only bypass auth check in development without valid Clerk keys
+    if (process.env.NODE_ENV === 'development' && 
+        (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || 
+         !process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY.startsWith('pk_'))) {
+      return;
     }
+    auth().protect();
   }
 });
 

@@ -269,18 +269,10 @@ export default function Home() {
               <Link href="/pricing" className="hover:text-foreground transition-colors">
                 Pricing
               </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                About
-              </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Contact
-              </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Privacy
-              </Link>
-              <Link href="#" className="hover:text-foreground transition-colors">
-                Terms
-              </Link>
+              <span className="text-foreground/40 cursor-not-allowed">About</span>
+              <span className="text-foreground/40 cursor-not-allowed">Contact</span>
+              <span className="text-foreground/40 cursor-not-allowed">Privacy</span>
+              <span className="text-foreground/40 cursor-not-allowed">Terms</span>
             </div>
           </div>
           <div className="mt-8 text-center text-sm text-muted-foreground">
