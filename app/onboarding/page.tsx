@@ -48,19 +48,21 @@ export default function OnboardingPage() {
   const handleComplete = async () => {
     // In a real app, this would save to user metadata
     // For now, we'll just redirect to dashboard
-    await user?.update({
-      unsafeMetadata: {
-        onboardingCompleted: true,
-        trackedRoutes: [
-          {
-            id: Date.now().toString(),
-            country: countries.find(c => c.id === selectedCountry)?.name,
-            visaType: selectedVisaType,
-            location: selectedLocation,
-          },
-        ],
-      },
-    });
+    if (user) {
+      await user.update({
+        unsafeMetadata: {
+          onboardingCompleted: true,
+          trackedRoutes: [
+            {
+              id: Date.now().toString(),
+              country: countries.find(c => c.id === selectedCountry)?.name,
+              visaType: selectedVisaType,
+              location: selectedLocation,
+            },
+          ],
+        },
+      });
+    }
     router.push("/dashboard");
   };
 
